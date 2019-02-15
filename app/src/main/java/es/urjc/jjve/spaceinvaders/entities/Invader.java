@@ -15,38 +15,38 @@ public class Invader {
     Random generator = new Random();
 
     // La nave espacial del jugador va a ser representada por un Bitmap
-    private Bitmap bitmap1;
-    private Bitmap bitmap2;
+    protected Bitmap bitmap1;
+    protected Bitmap bitmap2;
 
     // Creamos otros dos bitmaps para hacer el cambio de colores
-    private Bitmap bitmap3;
-    private Bitmap bitmap4;
+    protected Bitmap bitmap3;
+    protected Bitmap bitmap4;
 
     // Establecemos los esquemas de colores que vamos a usar
-    private final int ESQUEMA_1 = 1;
-    private final int ESQUEMA_2 = 2;
+    protected final int ESQUEMA_1 = 1;
+    protected final int ESQUEMA_2 = 2;
 
     // Variable para guardar el esquema actual, por defecto el primero de ellos.
-    private int seleccionado = ESQUEMA_1;
+    protected int seleccionado = ESQUEMA_1;
 
     // Qué tan largo y ancho será nuestro Invader
-    private float length;
-    private float height;
+    protected float length;
+    protected float height;
 
     // X es el extremo a la izquierda del rectángulo que le da forma a nuestro invader
-    private float x;
+    protected float x;
 
     // Y es la coordenada superior
-    private float y;
+    protected float y;
 
     // Esto mantendrá la rapidez de los pixeles por segundo a la que el invader se moverá.
-    private float shipSpeed;
+    protected float shipSpeed;
 
     public final int LEFT = 1;
     public final int RIGHT = 2;
 
     // Se está moviendo la nave espacial y en qué dirección
-    private int shipMoving = RIGHT;
+    protected int shipMoving = RIGHT;
 
     boolean isVisible;
 

@@ -1,5 +1,6 @@
 package es.urjc.jjve.spaceinvaders;
 
+import es.urjc.jjve.spaceinvaders.entities.SpecialInvader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class InvaderTest {
     @Before
     public void setUp() throws Exception {
         SpaceInvadersActivity spa = new SpaceInvadersActivity();
-        invader = new SpecialInvader(spa,1920,1080);
+        invader = new SpecialInvader(spa, 1920, 1080);
     }
 
     @After
@@ -22,7 +23,7 @@ public class InvaderTest {
     }
 
     @Test
-    public void shipTeleport(){
+    public void invaderTeleport(){
         boolean tp = false;
         for(int i = 0; i<1000; i++){
             float oldX = invader.getX();

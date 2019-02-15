@@ -21,10 +21,7 @@ import java.util.TimerTask;
 import java.util.regex.Pattern;
 
 import es.urjc.jjve.spaceinvaders.R;
-import es.urjc.jjve.spaceinvaders.entities.Bullet;
-import es.urjc.jjve.spaceinvaders.entities.DefenceBrick;
-import es.urjc.jjve.spaceinvaders.entities.Invader;
-import es.urjc.jjve.spaceinvaders.entities.PlayerShip;
+import es.urjc.jjve.spaceinvaders.entities.*;
 import es.urjc.jjve.spaceinvaders.view.SpaceInvadersView;
 
 /**
@@ -615,8 +612,8 @@ public class ViewController {
     }
 
     public void specialInvader(Context context) {
-        this.specialInvader = new Invader(context,0,0,screenX,screenY);
-        this.specialInvader.setInvaderSpecial(context);
+        this.specialInvader = new SpecialInvader(context,screenX,screenY);
+        //this.specialInvader.setInvaderSpecial(context);
     }
 
     public void changeTrack(MediaPlayer m){
