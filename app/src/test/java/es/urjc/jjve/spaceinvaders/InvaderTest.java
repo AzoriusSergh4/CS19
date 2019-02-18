@@ -36,5 +36,6 @@ public class InvaderTest {
             }
         }
         assertTrue(tp);
+        
     }
 }
