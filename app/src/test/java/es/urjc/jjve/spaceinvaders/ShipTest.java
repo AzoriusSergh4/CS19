@@ -46,7 +46,6 @@ public class ShipTest {
         boolean tpConfirmed = (oldX != newX) || (oldY !=newY);
 
         assertTrue(tpConfirmed);
-
         
     }
 }
