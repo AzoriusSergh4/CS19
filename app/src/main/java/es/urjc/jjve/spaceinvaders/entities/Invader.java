@@ -12,8 +12,7 @@ import es.urjc.jjve.spaceinvaders.R;
 public class Invader {
     RectF rect;
 
-    
-
+    //--
     Random generator = new Random();
 
     // La nave espacial del jugador va a ser representada por un Bitmap
