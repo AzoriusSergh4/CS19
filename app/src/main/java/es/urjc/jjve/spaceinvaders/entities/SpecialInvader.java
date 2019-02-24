@@ -27,7 +27,7 @@ public class SpecialInvader extends Invader {
                 false);
 
 
-        
+
         // Ajusta el segundo bitmap a un tamaño apropiado para la resolución de la pantalla
         bitmap2 = Bitmap.createScaledBitmap(bitmap2,
                 (int) (length),
