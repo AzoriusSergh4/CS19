@@ -38,6 +38,15 @@ android:
     - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
     - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
     
+addons:
+  sonarcloud:
+    organization: "azoriussergh4-github" # the key of the org you chose at step #3
+    token:
+      secure: 2e480268f606192da6cbf4a621fa9fa9aabf60e4 # encrypted value of your token
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
+    
 before_install:
  - chmod +x gradlew
  - yes | sdkmanager "platforms;android-28"
@@ -45,6 +54,7 @@ script:
         - ./gradlew clean
         - ./gradlew assembleDebug
         - ./gradlew assembleDebugAndroidTest
+        
         
 deploy:
   provider: releases
