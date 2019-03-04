@@ -54,7 +54,7 @@ script:
           -Dsonar.projectKey=AzoriusSergh4_CS19 \
           -Dsonar.organization=azoriussergh4-github \
           -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=2e480268f606192da6cbf4a621fa9fa9aabf60e4
+          -Dsonar.login=SONAR_TOKEN
         - ./gradlew clean
         - ./gradlew assembleDebug
         - ./gradlew assembleDebugAndroidTest
