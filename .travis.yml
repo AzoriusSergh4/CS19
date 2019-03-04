@@ -49,15 +49,16 @@ before_install:
  - chmod +x gradlew
  - yes | sdkmanager "platforms;android-28"
 script:
-        - ./gradlew clean
-        - ./gradlew assembleDebug
-        - ./gradlew assembleDebugAndroidTest
         - sonar-scanner
         - ./gradlew sonarqube \
           -Dsonar.projectKey=AzoriusSergh4_CS19 \
           -Dsonar.organization=azoriussergh4-github \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=2e480268f606192da6cbf4a621fa9fa9aabf60e4
+        - ./gradlew clean
+        - ./gradlew assembleDebug
+        - ./gradlew assembleDebugAndroidTest
+        
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
