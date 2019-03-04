@@ -2,9 +2,6 @@
 
 
 buildscript {
-    dependencies.classpath
-    "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:
-    ${project.properties.get('sonarqubeVersion', 3.0)}"
     
     repositories {
         google()
