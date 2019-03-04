@@ -43,9 +43,7 @@ addons:
     organization: "azoriussergh4-github" # the key of the org you chose at step #3
     token:
       secure: 2e480268f606192da6cbf4a621fa9fa9aabf60e4 # encrypted value of your token
-script:
-  # other script steps might be done before running the actual analysis
-  - sonar-scanner
+
     
 before_install:
  - chmod +x gradlew
@@ -54,8 +52,12 @@ script:
         - ./gradlew clean
         - ./gradlew assembleDebug
         - ./gradlew assembleDebugAndroidTest
-        
-        
+        - sonar-scanner
+        - ./gradlew sonarqube \
+          -Dsonar.projectKey=AzoriusSergh4_CS19 \
+          -Dsonar.organization=azoriussergh4-github \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=2e480268f606192da6cbf4a621fa9fa9aabf60e4
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
