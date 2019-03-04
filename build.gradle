@@ -1,4 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+  id "org.sonarqube" version "2.7"
+}
 
 buildscript {
     
@@ -26,6 +29,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-plugins {
-  id "org.sonarqube" version "2.7"
-}
+
