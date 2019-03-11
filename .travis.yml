@@ -52,11 +52,11 @@ script:
         - ./gradlew assembleDebug
         - ./gradlew assembleDebugAndroidTest
         - sonar-scanner
-        - ./gradlew sonarqube \
-          -Dsonar.projectKey=AzoriusSergh4_CS19 \
-          -Dsonar.organization=azoriussergh4-github \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=SONAR_TOKEN
+#        - ./gradlew sonarqube \
+ #         -Dsonar.projectKey=AzoriusSergh4_CS19 \
+  #        -Dsonar.organization=azoriussergh4-github \
+   #       -Dsonar.host.url=https://sonarcloud.io \
+    #      -Dsonar.login=SONAR_TOKEN
         
         
 deploy:
