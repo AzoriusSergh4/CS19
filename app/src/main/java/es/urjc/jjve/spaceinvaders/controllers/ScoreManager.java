@@ -87,6 +87,9 @@ public class ScoreManager {
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            outputStreamWriter.close();
+            out.close();
         }
     }
 
@@ -123,6 +126,7 @@ public class ScoreManager {
             e.printStackTrace();
         } finally {
             //Por último, se devuelve el TreeMap con las puntuaciones
+            inputStream.close();
             return puntuaciones;
         }
     }
