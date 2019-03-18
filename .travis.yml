@@ -51,7 +51,7 @@ script:
         - ./gradlew clean
         - ./gradlew assembleDebug
         - ./gradlew assembleDebugAndroidTest
-        - sonar-scanner
+        - ./gradlew sonarqube
 #        - ./gradlew sonarqube \
  #         -Dsonar.projectKey=AzoriusSergh4_CS19 \
   #        -Dsonar.organization=azoriussergh4-github \
