@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import es.urjc.jjve.spaceinvaders.entities.Bullet;
 import es.urjc.jjve.spaceinvaders.entities.DefenceBrick;
@@ -21,6 +23,8 @@ import es.urjc.jjve.spaceinvaders.view.SpaceInvadersView;
  */
 
 public class ViewController {
+
+    private static final Logger LOGGER = Logger.getLogger(ViewController.class.getName());
 
     // Up to 60 invaders
     List<Invader> invaders;
@@ -154,11 +158,9 @@ public class ViewController {
         boolean lost=false;
 
         for(Invader inv:invaders) {
-            if (inv.getVisibility()) {
-                if ((godMode <= 0) && (RectF.intersects(playerShip.getRect(), inv.getRect()))) {
-                    inv.setInvisible();
-                    lost= true;
-                }
+            if ((inv.getVisibility()) && (godMode <= 0) && (RectF.intersects(playerShip.getRect(), inv.getRect()))) {
+                inv.setInvisible();
+                lost= true;
             }
         }
         return lost;
@@ -276,13 +278,12 @@ public class ViewController {
             if (inv.getVisibility()) {
                 inv.update(fps); // Move the next invader
 
-                if(!underage) { //If its not the underage version, the invaders shoot, else they don´t
-                    if ((invadersBullets.size() < maxInvaderBullets) && (inv.takeAim(playerShip.getX(), playerShip.getLength()))) {// Does he want to take a shot?
-                        Bullet newBullet = new Bullet(screenY, this.view.getContext());
-                        invadersBullets.add(newBullet);
-                        newBullet.shoot(inv.getX() + inv.getLength() / 2, inv.getY(), newBullet.DOWN); // If so try and spawn a bullet// Shot fired, Prepare for the next shot
-                        // Loop back to the first one if we have reached the last
-                    }
+                //If its not the underage version, the invaders shoot, else they don´t
+                if((!underage) && (invadersBullets.size() < maxInvaderBullets) && (inv.takeAim(playerShip.getX(), playerShip.getLength()))) {
+                    Bullet newBullet = new Bullet(screenY, this.view.getContext());
+                    invadersBullets.add(newBullet);
+                    newBullet.shoot(inv.getX() + inv.getLength() / 2, inv.getY(), newBullet.DOWN); // If so try and spawn a bullet// Shot fired, Prepare for the next shot
+                    // Loop back to the first one if we have reached the last
                 }
 
                 // If that move caused them to bump the screen change bumped to true
@@ -413,12 +414,10 @@ public class ViewController {
         }
 
         // Build the shelters
-        int numBricks = 0;
         for (int shelterNumber = 0; shelterNumber < 4; shelterNumber++) {
             for (int column = 0; column < 10; column++) {
                 for (int row = 0; row < 5; row++) {
                     bricks.add(new DefenceBrick(row, column, shelterNumber, screenX, screenY));
-                    numBricks++;
                 }
             }
         }
@@ -448,7 +447,7 @@ public class ViewController {
                     view.drawGameObject(b.getRect());
                 }
             } catch (RuntimeException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.INFO, e.getMessage());
             }
         }
     }
