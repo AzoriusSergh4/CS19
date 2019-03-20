@@ -290,12 +290,9 @@ public class ViewController {
                 if (inv.getX() > screenX - inv.getLength() || inv.getX() < 0) {
                     reverse();
                 }
-            }
 
-            if(inv.getVisibility()){
                 invaderColisionBrick(inv);
             }
-
         }
     }
 
