@@ -1,40 +1,24 @@
 package es.urjc.jjve.spaceinvaders;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
-
-import java.io.File;
 import java.util.TreeSet;
-
-import es.urjc.jjve.spaceinvaders.R;
-import es.urjc.jjve.spaceinvaders.SpaceInvadersActivity;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import es.urjc.jjve.spaceinvaders.controllers.Score;
 import es.urjc.jjve.spaceinvaders.controllers.ScoreManager;
-import es.urjc.jjve.spaceinvaders.controllers.ViewController;
 
 public class HighScoreActivity extends AppCompatActivity implements OnClickListener  {
 
@@ -42,6 +26,8 @@ public class HighScoreActivity extends AppCompatActivity implements OnClickListe
     private String fileScores;
     private String nombre;
     private Uri playerImageUri;
+
+    private static final Logger LOGGER = Logger.getLogger("es.urjc.jjve.spaceinvaders.HighScoreActivity");
 
     @Override   //Este método se carga el primero en cuanto se llama a la activity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +51,7 @@ public class HighScoreActivity extends AppCompatActivity implements OnClickListe
         try {
             foto.setImageBitmap(getBitmapFromUri(playerImageUri));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "error al establecer la foto");
         }
 
         if (score>=500){
@@ -116,7 +102,7 @@ public class HighScoreActivity extends AppCompatActivity implements OnClickListe
     }
 
     //Genera un URI como el método anterior pero maneja datos e imágenes mucho mayores
-    public Bitmap getBitmapFromUri(Uri uri) throws FileNotFoundException, IOException{
+    public Bitmap getBitmapFromUri(Uri uri) throws IOException{
         InputStream input = this.getContentResolver().openInputStream(uri);
 
         BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
@@ -148,21 +134,5 @@ public class HighScoreActivity extends AppCompatActivity implements OnClickListe
         if(k==0) return 1;
         else return k;
     }
-    // Genera un bitmap a partir de un URI
-    /*private Bitmap getBitmapFromUri(Uri contentUri) throws IOException {
-
-        return MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentUri);
-
-        /*String path = null;
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-        if (cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            path = cursor.getString(columnIndex);
-        }
-        cursor.close();
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
-        return bitmap;
-    }*/
 
 }

@@ -40,6 +40,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import es.urjc.jjve.spaceinvaders.PlayerNameActivity;
 import es.urjc.jjve.spaceinvaders.R;
@@ -63,6 +65,8 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
     private volatile boolean playing;
     private long timeThisFrame;
     private long fps = 20;
+
+    private static final Logger LOGGER = Logger.getLogger("es.urjc.jjve.spaceinvaders.view.SpaceInvadersView");
 
     // Our SurfaceHolder to lock the surface before we draw our graphics
     private SurfaceHolder ourHolder;
@@ -197,7 +201,7 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
                 System.out.println(ourHolder.getSurface().isValid());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           LOGGER.log(Level.SEVERE, "No se ha podido inicializar la interfaz");
         }
     }
 
@@ -219,7 +223,7 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
             if (canvas != null)
                 canvas.drawColor(Color.argb(255, 0, 0, 0));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "No se ha podido dibujar el fondo");
         }
     }
 
