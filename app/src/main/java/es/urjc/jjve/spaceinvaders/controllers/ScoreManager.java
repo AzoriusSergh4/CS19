@@ -1,41 +1,24 @@
 package es.urjc.jjve.spaceinvaders.controllers;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.Writer;
-import java.net.URI;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import es.urjc.jjve.spaceinvaders.R;
 
 public class ScoreManager {
 
@@ -44,6 +27,8 @@ public class ScoreManager {
 
     private BufferedReader br;
     private Context context;
+
+    private static final Logger LOGGER = Logger.getLogger("es.urjc.jjve.spaceinvaders.controllers.ScoreManager");
 
     public ScoreManager(Context context) {
         this.context = context;
@@ -86,10 +71,7 @@ public class ScoreManager {
             outputStreamWriter.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            outputStreamWriter.close();
-            out.close();
+            LOGGER.log(Level.SEVERE, "Error en los buffers");
         }
     }
 
@@ -121,12 +103,11 @@ public class ScoreManager {
             br.close();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Fichero no encontrado");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error en los buffers");
         } finally {
             //Por último, se devuelve el TreeMap con las puntuaciones
-            inputStream.close();
             return puntuaciones;
         }
     }
