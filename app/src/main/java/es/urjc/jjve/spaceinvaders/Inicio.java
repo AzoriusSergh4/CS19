@@ -11,10 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-
-
-import es.urjc.jjve.spaceinvaders.R;
-
 public class Inicio extends AppCompatActivity implements OnClickListener {
 
     @Override
@@ -45,17 +41,15 @@ public class Inicio extends AppCompatActivity implements OnClickListener {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
 
         //Esto permite permisos del uso de la cámara de la app
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
-            }else {
+            if(!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},1);
             }
         }
@@ -68,13 +62,11 @@ public class Inicio extends AppCompatActivity implements OnClickListener {
             Intent i = new Intent(getApplicationContext(),SpaceInvadersActivity.class);
             i.putExtra("underage",false);
             startActivity(i);
-            //finish();
         }
         if(v.getId()== findViewById(R.id.no).getId()){
             Intent i = new Intent(getApplicationContext(),SpaceInvadersActivity.class);
             i.putExtra("underage",true);
             startActivity(i);
-            //finish();
         }
     }
 }
