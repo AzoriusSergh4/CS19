@@ -27,9 +27,9 @@ public class ViewController {
     private static final Logger LOGGER = Logger.getLogger(ViewController.class.getName());
 
     // Up to 60 invaders
-    List<Invader> invaders;
-    int numInvaders = 0;
-    int killedInvaders = 0;
+    private List<Invader> invaders;
+    private int numInvaders = 0;
+    private int killedInvaders = 0;
     private boolean underage;
     private SpaceInvadersView view;
     private PlayerShip playerShip;
@@ -575,4 +575,7 @@ public class ViewController {
         godMode=15;
     }
 
+    public List<Invader> getInvaders() {
+        return invaders;
+    }
 }
