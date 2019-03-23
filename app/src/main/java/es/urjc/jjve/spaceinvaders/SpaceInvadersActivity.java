@@ -45,7 +45,7 @@ public class SpaceInvadersActivity extends Activity {
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-                //Not necessary at all, but cannot throw an UnsupportedOperationException
+                throw new UnsupportedOperationException();
             }
 
             @Override
