@@ -234,4 +234,8 @@ public class Invader {
         this.shipMoving=RIGHT;
 
     }
+
+    public int getShipMoving() {
+        return shipMoving;
+    }
 }

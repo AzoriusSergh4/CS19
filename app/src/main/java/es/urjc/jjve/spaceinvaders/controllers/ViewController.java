@@ -53,9 +53,10 @@ public class ViewController {
     private int screenX;
     private int screenY;
 
+    private JoystickController joystickController = new JoystickController();
+
 
     public ViewController(Context context, int x, int y, SpaceInvadersView view) {
-
 
         this.screenX = x;
         this.screenY = y;
@@ -66,7 +67,6 @@ public class ViewController {
         this.godBullets = new ArrayList<>();
 
         this.initGame(context);
-
 
     }
 
@@ -146,7 +146,7 @@ public class ViewController {
 
     }
 
-    private void reverse() {
+    public void reverse() {
 
         for (Invader inv : invaders) {
             inv.dropDownAndReverse();
@@ -263,7 +263,7 @@ public class ViewController {
     /**
      * Changes the colour of the invaders and the ship
      */
-    private void changeColors() {
+    public void changeColors() {
         for (int x = 0; x < numInvaders; x++) {
             invaders.get(x).chColour();
         }
@@ -524,37 +524,8 @@ public class ViewController {
     }
 
     public void shipMovement(float x, float y) {
-        float epsilon = 0.01f;
-        if (Math.abs(x - 0) > epsilon && (Math.abs(y - 0) > epsilon)) {
-            final double angle = Math.atan2(y, x);
-            final double halfPI = Math.PI / 2;
-            final double quarterPI = Math.PI / 4;
-            final double eighthPI = Math.PI / 8;
-            if (angle >= -eighthPI && angle < eighthPI) {
-                playerShip.setMovementState(2);
-            } else if (angle >= eighthPI && angle < (quarterPI + eighthPI)) {
-                playerShip.setMovementState(8);
-            } else if (angle >= (quarterPI + eighthPI) && angle < (halfPI + eighthPI)) {
-                playerShip.setMovementState(4);
-            } else if (angle >= (halfPI + eighthPI) && angle < (Math.PI - eighthPI)) {
-                playerShip.setMovementState(7);
-            } else if (angle >= (Math.PI - eighthPI) && angle <= Math.PI) {
-                playerShip.setMovementState(1);
-            } else if (angle >= -Math.PI && angle < (-Math.PI + eighthPI)) {
-                playerShip.setMovementState(1);
-            } else if (angle >= (-Math.PI + eighthPI) && angle < (-halfPI - eighthPI)) {
-                playerShip.setMovementState(5);
-            } else if (angle >= (-halfPI - eighthPI) && angle < (-halfPI + eighthPI)) {
-                playerShip.setMovementState(3);
-            } else if (angle >= (-halfPI + eighthPI) && angle < (-eighthPI)) {
-                playerShip.setMovementState(6);
-            } else {
-                playerShip.setMovementState(0);
-            }
-        } else {
-            playerShip.setMovementState(0);
-        }
-
+        int movement = this.joystickController.shipMovement(x, y);
+        playerShip.setMovementState(movement);
     }
 
     public int getScore() {
