@@ -40,7 +40,6 @@ public class ViewController {
     private List<Bullet> playerBullets;
     private List<Bullet> godBullets;
 
-    private int maxInvaderBullets = 10;
     // The player's shelters are built from bricks
     private List<DefenceBrick> bricks;
 
@@ -53,9 +52,10 @@ public class ViewController {
     private int screenX;
     private int screenY;
 
+    private JoystickController joystickController = new JoystickController();
+
 
     public ViewController(Context context, int x, int y, SpaceInvadersView view) {
-
 
         this.screenX = x;
         this.screenY = y;
@@ -66,7 +66,6 @@ public class ViewController {
         this.godBullets = new ArrayList<>();
 
         this.initGame(context);
-
 
     }
 
@@ -146,7 +145,7 @@ public class ViewController {
 
     }
 
-    private void reverse() {
+    public void reverse() {
 
         for (Invader inv : invaders) {
             inv.dropDownAndReverse();
@@ -154,7 +153,7 @@ public class ViewController {
     }
 
 
-    public boolean shipColisionInvaders(){
+    private boolean shipColisionInvaders(){
         boolean lost=false;
 
         for(Invader inv:invaders) {
@@ -171,7 +170,7 @@ public class ViewController {
      * @param inv
      * Checks if inv collides with any defence brick, if so the brick is invisible, the invader dies and the colour of ship and invaders are changed
      */
-    public void invaderColisionBrick(Invader inv){
+    private void invaderColisionBrick(Invader inv){
         for (DefenceBrick brick : bricks) {
             if ((brick.getVisibility()) && (RectF.intersects(inv.getRect(), brick.getRect()))) {
                 // A collision has occurred
@@ -185,7 +184,7 @@ public class ViewController {
     /**
      * Checks if the ship has collided with a shelter brick, if so the brick is destroyed and the colour of ship and invaders changed
      */
-    public void shipColisionBrick(){
+    private void shipColisionBrick(){
         for (DefenceBrick brick : bricks) {
             if ((brick.getVisibility()) && (RectF.intersects(playerShip.getRect(), brick.getRect()))) {
                 // A collision has occurred
@@ -201,7 +200,7 @@ public class ViewController {
      * @param currentBull
      * Checks if currentBull has collided with brick
      */
-    public void bulletColisionBrick (DefenceBrick brick, Bullet currentBull) {
+    private void bulletColisionBrick(DefenceBrick brick, Bullet currentBull) {
         if ((brick.getVisibility()) && (RectF.intersects(currentBull.getRect(), brick.getRect()))) {
             // A collision has occurred
             currentBull.setInactive();
@@ -216,7 +215,7 @@ public class ViewController {
      * @param currentBull
      * checks if currentBull collides with inv, if so the score is added depending on the type of invader
      */
-    public void bulletCollisionInvader(Invader inv, Bullet currentBull){
+    private void bulletCollisionInvader(Invader inv, Bullet currentBull){
         if ((inv.getVisibility()) && (RectF.intersects(currentBull.getRect(), inv.getRect()))) { //Has a bullet hit an invader?
             inv.setInvisible();
             currentBull.setInactive();
@@ -245,22 +244,6 @@ public class ViewController {
     }
 
     /**
-     *
-     * @param bullet
-     * Checks if bullet collides with the player ship, if so the returned value is false because its game over
-     * @return
-     */
-    private boolean bulletColisionShip(Bullet bullet) {
-
-        if (godMode<=0) {
-            return !(RectF.intersects(bullet.getRect(), playerShip.getRect())); //Has a bullet hit the ship?
-        }else{
-            return true;
-        }
-
-    }
-
-    /**
      * Changes the colour of the invaders and the ship
      */
     private void changeColors() {
@@ -270,7 +253,7 @@ public class ViewController {
         playerShip.chColour();
     }
 
-    public void updateInvaders(long fps){
+    private void updateInvaders(long fps){
         //For each invader, we check if its an active one and then we check if it has the opportunity to shoot
         //if the invader has reached the screen limit, it reverses the direction and goes down
         for (Invader inv : invaders) { //For each visible invader, if there is room in the array,and it wants to shoot
@@ -279,6 +262,7 @@ public class ViewController {
                 inv.update(fps); // Move the next invader
 
                 //If its not the underage version, the invaders shoot, else they don´t
+                int maxInvaderBullets = 10;
                 if((!underage) && (invadersBullets.size() < maxInvaderBullets) && (inv.takeAim(playerShip.getX(), playerShip.getLength()))) {
                     Bullet newBullet = new Bullet(screenY, this.view.getContext());
                     invadersBullets.add(newBullet);
@@ -297,7 +281,7 @@ public class ViewController {
     }
 
     //Actualizar balas nave
-    public void updatePlayerBullet(long fps){
+    private void updatePlayerBullet(long fps){
         for (int i=0;i<playerBullets.size();i++) {
             Bullet currentBull = playerBullets.get(i);
             currentBull.update(fps);
@@ -330,7 +314,7 @@ public class ViewController {
     }
 
     //Actualizar balas dios
-    public void updateGodBullets(long fps){
+    private void updateGodBullets(long fps){
 
         for (Bullet bullet : godBullets) {
             if (bullet.getStatus()) {
@@ -352,9 +336,6 @@ public class ViewController {
                 for (Invader inv : invaders) {
                     bulletCollisionInvader(inv, bullet);
                 }
-
-                //Checks the colision with the ship
-                bulletColisionShip(bullet);
             }
         }
     }
@@ -367,7 +348,7 @@ public class ViewController {
      * Si chocan con un muro se cambia el color de los personajes
      * Si chocan con la nave termina el juego
      */
-    public void updateInvadersBullet(long fps){
+    private void updateInvadersBullet(long fps){
         for (Bullet bullet : invadersBullets) {
             if (bullet.getStatus()) {
                 bullet.update(fps);
@@ -381,8 +362,6 @@ public class ViewController {
                 for(DefenceBrick brick:bricks) {
                     bulletColisionBrick(brick,bullet);
                 }
-                //Checks the colision with the ship
-                bulletColisionShip(bullet);
             }
         }
     }
@@ -391,7 +370,7 @@ public class ViewController {
     // If SpaceInvadersActivity is started then
     // start our thread.
 
-    public void initGame(Context context) {
+    private void initGame(Context context) {
         // Make a new player space ship
         playerShip = new PlayerShip(context, screenX, screenY);
 
@@ -426,7 +405,7 @@ public class ViewController {
         view.drawGameObject(playerShip.getBitmap(), playerShip.getX(), playerShip.getY());
     }
 
-    public void paintInvaders() {
+    private void paintInvaders() {
         for (Invader i : invaders) {
             if (i.getVisibility()) {
                 this.view.drawGameObject(i.getBitmap(), i.getX(), i.getY());
@@ -437,7 +416,7 @@ public class ViewController {
         }
     }
 
-    public void paintBricks() {
+    private void paintBricks() {
         for (DefenceBrick b : bricks) {
             try {
                 if (b.getVisibility()) {
@@ -449,17 +428,8 @@ public class ViewController {
         }
     }
 
-
-    public SpaceInvadersView getView() {
+    private SpaceInvadersView getView() {
         return view;
-    }
-
-    public void setView(SpaceInvadersView view) {
-        this.view = view;
-    }
-
-    public boolean isUnderage() {
-        return underage;
     }
 
     public void setUnderage(boolean underage) {
@@ -503,58 +473,10 @@ public class ViewController {
         }
     }
 
-    /**
-     * Changes the invader and ship bullets to god array if they are godMode´d
-     */
-    public void changeBullets(){
-        for(Bullet invBullet:invadersBullets){
-            if(invBullet.getGodBullet()){
-                godBullets.add(invBullet);
-            }
-        }
-        for(Bullet shipBullet:playerBullets){
-            if(shipBullet.getGodBullet()){
-                godBullets.add(shipBullet);
-            }
-        }
-        for(Bullet godBullet:godBullets){
-            invadersBullets.remove(godBullet);
-            playerBullets.remove(godBullet);
-        }
-    }
 
     public void shipMovement(float x, float y) {
-        float epsilon = 0.01f;
-        if (Math.abs(x - 0) > epsilon && (Math.abs(y - 0) > epsilon)) {
-            final double angle = Math.atan2(y, x);
-            final double halfPI = Math.PI / 2;
-            final double quarterPI = Math.PI / 4;
-            final double eighthPI = Math.PI / 8;
-            if (angle >= -eighthPI && angle < eighthPI) {
-                playerShip.setMovementState(2);
-            } else if (angle >= eighthPI && angle < (quarterPI + eighthPI)) {
-                playerShip.setMovementState(8);
-            } else if (angle >= (quarterPI + eighthPI) && angle < (halfPI + eighthPI)) {
-                playerShip.setMovementState(4);
-            } else if (angle >= (halfPI + eighthPI) && angle < (Math.PI - eighthPI)) {
-                playerShip.setMovementState(7);
-            } else if (angle >= (Math.PI - eighthPI) && angle <= Math.PI) {
-                playerShip.setMovementState(1);
-            } else if (angle >= -Math.PI && angle < (-Math.PI + eighthPI)) {
-                playerShip.setMovementState(1);
-            } else if (angle >= (-Math.PI + eighthPI) && angle < (-halfPI - eighthPI)) {
-                playerShip.setMovementState(5);
-            } else if (angle >= (-halfPI - eighthPI) && angle < (-halfPI + eighthPI)) {
-                playerShip.setMovementState(3);
-            } else if (angle >= (-halfPI + eighthPI) && angle < (-eighthPI)) {
-                playerShip.setMovementState(6);
-            } else {
-                playerShip.setMovementState(0);
-            }
-        } else {
-            playerShip.setMovementState(0);
-        }
-
+        int movement = this.joystickController.shipMovement(x, y);
+        playerShip.setMovementState(movement);
     }
 
     public int getScore() {
@@ -563,10 +485,6 @@ public class ViewController {
 
     public void specialInvader(Context context) {
         this.specialInvader = new SpecialInvader(context,screenX,screenY);
-    }
-
-    public void changeTrack(MediaPlayer m){
-        m.selectTrack(m.getAudioSessionId()+1);
     }
 
     public void posicionRandom(){

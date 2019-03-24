@@ -10,6 +10,7 @@ import es.urjc.jjve.spaceinvaders.controllers.ViewController;
 import es.urjc.jjve.spaceinvaders.entities.Invader;
 import es.urjc.jjve.spaceinvaders.view.SpaceInvadersView;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ViewControllerTest {
@@ -55,6 +56,19 @@ public class ViewControllerTest {
             assertTrue(bigger);
         }
 
+    }
+
+    @Test
+    public void reverseInvadersTest(){
+
+        int direction;
+
+        viewController.reverse();
+
+        for (Invader inv: viewController.getInvaders()){
+            direction = inv.getShipMoving();
+            assertEquals(1, direction);
+        }
     }
 
 }
