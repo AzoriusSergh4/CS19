@@ -51,7 +51,7 @@ public class SpecialInvader extends Invader {
 
     public void teleport(){
         float x =(float) (Math.random()*(screenX))+0;
-        float y =(float) (Math.random()*(screenY/2))+0;
+        float y =(float) (Math.random()*(screenY/2f))+0;
         this.x = x;
         this.y = y;
     }
