@@ -1,0 +1,57 @@
+Feature: Modo de juego para menores de 13 años
+
+  Scenario: Un niño comienza a jugar al Space Invaders
+    Given El jugador es menor de 13 años
+     When El juego comienza
+     Then Los disparos están desactivados
+
+  Scenario: Un niño comienza a jugar al Space Invaders
+    Given El jugador es mayor de 13 años
+     When El juego comienza
+     Then Los disparos están activados
+
+Feature: Foto después de cada partida
+
+  Scenario: Alguien finaliza su partida del space invaders 
+    Given La persona consiente el uso de la cámara
+     When Acaba la partida
+     Then La persona se puede sacar una foto
+     And La persona verá un ranking con su foto y puntuación.
+
+  Scenario: Alguien finaliza su partida del space invaders 
+    Given La persona no consiente el uso de la cámara
+     When Acaba la partida
+     Then La persona verá un ranking con una foto predeterminada y su puntuación.
+
+Feature: Cambio de color al tocar barrera
+
+  Scenario: Un marciano ha disparado
+    Given El marciano dispara
+     When La bala toca la barrera
+     Then Todos los marcianos cambian al mismo color
+     And Desaparece la barrera y el disparo
+
+  Scenario: Varios marcianos han disparado
+    Given Los marcianos disparan a la vez
+     When Las balas tocan alguna barrera
+     Then Todos los marcianos cambian de color aleatoriamente
+     And Desaparecen las barreras y las balas.
+
+Feature: Marciano especial
+
+  Scenario: Comienza la partida 
+    Given La partida acaba de empezar
+     When Comienza el juego
+     Then Aparece un marciano especial
+
+  Scenario: Ha muerto el marciano especial 
+    Given El marciano espacial muere
+     When Han pasado 10 segundos
+     Then Aparece un nuevo marciano especial
+
+Feature: Movimiento vertical de la nave
+
+  Scenario: El jugador quiere mover la nave hacia arriba
+    Given Un usuario quiere esquivar un disparo
+     When Mueve el Joystick hacia arriba
+     Then La nave se mueve hacia arriba.
