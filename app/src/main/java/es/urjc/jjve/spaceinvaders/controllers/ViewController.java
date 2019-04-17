@@ -66,8 +66,6 @@ public class ViewController {
         this.godBullets = new ArrayList<>();
 
         this.initGame(context);
-
-
     }
 
 
@@ -582,5 +580,27 @@ public class ViewController {
     public void setPlayerShip(PlayerShip s){
         this.playerShip = s;
     }
+
+    public void setInvadersBullets(List<Bullet> invadersBullets) {
+        this.invadersBullets = invadersBullets;
+    }
+
+    public void setPlayerBullets(List<Bullet> playerBullets) {
+        this.playerBullets = playerBullets;
+    }
+
+    public List<Bullet> getPlayerBullets() {
+        return playerBullets;
+    }
+    public List<Bullet> getInvadersBullets() {
+        return invadersBullets;
+    }
+    public List<Invader> getInvaders() {
+        return invaders;
+    }
+    public void setInvaders(List<Invader> l){
+        this.invaders = l;
+    }
+
 
 }
