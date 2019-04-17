@@ -575,4 +575,12 @@ public class ViewController {
         godMode=15;
     }
 
+    public PlayerShip getPlayerShip(){
+        return this.playerShip;
+    }
+
+    public void setPlayerShip(PlayerShip s){
+        this.playerShip = s;
+    }
+
 }

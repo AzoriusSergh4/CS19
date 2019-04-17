@@ -2,25 +2,12 @@ package es.urjc.jjve.spaceinvaders;
 
 import android.app.Activity;
 import android.graphics.Point;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Display;
 import android.view.SurfaceHolder;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.Space;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.Vector;
 
 import es.urjc.jjve.spaceinvaders.controllers.ViewController;
-import es.urjc.jjve.spaceinvaders.entities.PlayerShip;
 import es.urjc.jjve.spaceinvaders.view.SpaceInvadersView;
 // SpaceInvadersActivity es el punto de entrada al juego.
 // Se va a encargar del ciclo de vida del juego al llamar
