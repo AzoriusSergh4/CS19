@@ -279,6 +279,10 @@ public class ViewController {
         }
     }
 
+    public void invaderShoot(Bullet bullet){
+        this.invadersBullets.add(bullet);
+    }
+
     public void updateInvaders(long fps){
         //For each invader, we check if its an active one and then we check if it has the opportunity to shoot
         //if the invader has reached the screen limit, it reverses the direction and goes down
@@ -482,6 +486,12 @@ public class ViewController {
 
             this.playerBullets.add(newBull);
             newBull.shoot((playerShip.getX() + playerShip.getLength()/2), playerShip.getY(), 0);
+        }
+    }
+
+    public void notifyShoot(Bullet newBull) {
+        if(playerBullets.isEmpty()) {
+            this.playerBullets.add(newBull);
         }
     }
 

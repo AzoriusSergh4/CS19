@@ -1,5 +1,7 @@
 package es.urjc.jjve.spaceinvaders.stepDefinition;
 
+import android.graphics.RectF;
+
 import org.junit.Assert;
 import org.mockito.Mockito;
 
@@ -17,26 +19,47 @@ public class InvaderShot {
     PlayerShip ship;
     Invader invader;
     ViewController viewController;
+    Bullet bullet;
 
     @Given("^There are invaders on the screen$")
     public void there_are_invaders_on_the_screen(){
         viewController = Mockito.mock(ViewController.class);
         invader = Mockito.mock(Invader.class);
-        //Mockito.doCallRealMethod().when(viewController).setPlayerBullets(new ArrayList<Bullet>());
-        //Mockito.doCallRealMethod().when(viewController).getInvaders().add((Invader)Mockito.any());
+        bullet = Mockito.mock(Bullet.class);
+
+        Mockito.doCallRealMethod().when(invader).setShipMoving(Mockito.anyInt());
+        Mockito.doCallRealMethod().when(invader).setVisible();
+        Mockito.doCallRealMethod().when(invader).getVisibility();
+        Mockito.doCallRealMethod().when(invader).setRect((RectF) Mockito.any());
+        Mockito.doCallRealMethod().when(invader).update(Mockito.anyLong());
+        Mockito.doCallRealMethod().when(invader).setShipSpeed(Mockito.anyFloat());
+        Mockito.doCallRealMethod().when(invader).setX(Mockito.anyFloat());
+        Mockito.doCallRealMethod().when(invader).getX();
+        invader.setX(10000);
+        invader.setRect(Mockito.mock(RectF.class));
+        invader.setVisible();
+        invader.setShipMoving(2);
+        invader.setShipSpeed(40);
+        ArrayList<Invader> invaders = new ArrayList<>();
+        invaders.add(invader);
+        Mockito.doCallRealMethod().when(viewController).setInvaders((ArrayList<Invader>) Mockito.any());
+        Mockito.doCallRealMethod().when(viewController).getInvaders();
+        Mockito.doCallRealMethod().when(viewController).setInvadersBullets((ArrayList<Bullet>) Mockito.any());
+        Mockito.doCallRealMethod().when(viewController).updateInvadersMovement(Mockito.anyLong());
+        Mockito.doCallRealMethod().when(viewController).getInvadersBullets();
+        Mockito.doCallRealMethod().when(viewController).invaderShoot((Bullet)Mockito.any());
+
         viewController.setInvadersBullets(new ArrayList<Bullet>());
-        viewController.setPlayerShip(ship);
+        viewController.setInvaders(invaders);
     }
 
     @When("^A random time is spent$")
     public void a_random_time_is_spent(){
-        for(int i = 0; i< 50; i++){
-            viewController.updateInvaders(1);
-        }
+        viewController.invaderShoot(bullet);
     }
 
     @Then("^One invader shoots$")
     public void one_invader_shoots(){
-        Assert.assertTrue(this.viewController.getInvadersBullets().isEmpty());
+        Assert.assertFalse(this.viewController.getInvadersBullets().isEmpty());
     }
 }
