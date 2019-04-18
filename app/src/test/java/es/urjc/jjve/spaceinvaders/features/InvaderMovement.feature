@@ -1,4 +1,4 @@
-Feature: Warship Movement
+Feature: Invader Movement
   In Order To Increase Difficult
   As a user
   The invaders move
@@ -9,6 +9,6 @@ Feature: Warship Movement
     Then The invader moves
 
   Scenario: The invaders reverse their movement
-    Given There is a invader on the screen
+    Given There is a invader near the screen edge
     When The invader is in the screen edge
     Then The invader reverses his movement

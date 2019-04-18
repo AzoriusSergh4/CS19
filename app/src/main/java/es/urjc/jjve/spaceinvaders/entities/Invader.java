@@ -104,6 +104,10 @@ public class Invader {
         isVisible = false;
     }
 
+    public void setVisible(){
+        this.isVisible = true;
+    }
+
     public boolean getVisibility(){
         return isVisible;
     }
@@ -233,5 +237,25 @@ public class Invader {
         this.shipSpeed=75;
         this.shipMoving=RIGHT;
 
+    }
+
+    public void setShipMoving(int shipMoving) {
+        this.shipMoving = shipMoving;
+    }
+
+    public int getShipMoving() {
+        return shipMoving;
+    }
+
+    public void setRect(RectF r){
+        this.rect = r;
+    }
+
+    public void setShipSpeed(float shipSpeed) {
+        this.shipSpeed = shipSpeed;
+    }
+
+    public void setX(float x) {
+        this.x = x;
     }
 }

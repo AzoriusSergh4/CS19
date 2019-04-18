@@ -144,7 +144,7 @@ public class ViewController {
 
     }
 
-    private void reverse() {
+    public void reverse() {
 
         for (Invader inv : invaders) {
             inv.dropDownAndReverse();
@@ -266,6 +266,17 @@ public class ViewController {
             invaders.get(x).chColour();
         }
         playerShip.chColour();
+    }
+
+    public void updateInvadersMovement(long fps){
+        for(Invader inv : invaders){
+            if(inv.getVisibility()) {
+                inv.update(fps);
+                if (inv.getX() > screenX - inv.getLength() || inv.getX() < 0) {
+                    reverse();
+                }
+            }
+        }
     }
 
     public void updateInvaders(long fps){
