@@ -30,7 +30,6 @@ public class InvaderMovement {
         Mockito.doCallRealMethod().when(invader).setShipSpeed(Mockito.anyFloat());
         Mockito.doCallRealMethod().when(invader).setX(Mockito.anyFloat());
         Mockito.doCallRealMethod().when(invader).getX();
-        invader.setX(10000);
         invader.setRect(Mockito.mock(RectF.class));
         invader.setVisible();
         invader.setShipMoving(2);
