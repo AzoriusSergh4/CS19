@@ -173,6 +173,17 @@ public class Invader {
 
     }
 
+    public void updateMove(long fps){
+        if(shipMoving == LEFT){
+            x = x - shipSpeed / fps;
+        }
+
+        if(shipMoving == RIGHT){
+            x = x + shipSpeed / fps;
+        }
+
+    }
+
     public void dropDownAndReverse(){
         if(shipMoving == LEFT){
             shipMoving = RIGHT;
