@@ -109,6 +109,16 @@ public class Bullet {
         rect.bottom = y + height;
     }
 
+    public void updateMove(long fps){
+
+        // Solo se mueve para arriba o abajo
+        if(heading == UP){
+            y = y - speed / fps;
+        }else{
+            y = y + speed / fps;
+        }
+    }
+
     public void changeDir() {
         this.heading = 1-this.heading;
     }
@@ -123,5 +133,13 @@ public class Bullet {
 
     public float getY() {
         return y;
+    }
+
+    public void setHeading(int h){
+        heading = h;
+    }
+
+    public void setSpeed(float s){
+        speed = s;
     }
 }

@@ -1,4 +1,4 @@
-package es.urjc.jjve.spaceinvaders.stepDefinition;
+package es.urjc.jjve.spaceinvaders.stepDefinitionIntegrationTests;
 
 import android.graphics.RectF;
 
