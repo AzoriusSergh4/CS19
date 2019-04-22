@@ -1,57 +1,46 @@
-Feature: Modo de juego para menores de 13 años
+Feature: Invader Movement
+  In Order To Increase Difficult
+  As a user
+  The invaders move
 
-  Scenario: Un niño comienza a jugar al Space Invaders
-    Given El jugador es menor de 13 años
-     When El juego comienza
-     Then Los disparos están desactivados
+  Scenario: The invaders move to the right
+    Given There is a invader on the screen
+    When The game updates
+    Then The invader moves
 
-  Scenario: Un niño comienza a jugar al Space Invaders
-    Given El jugador es mayor de 13 años
-     When El juego comienza
-     Then Los disparos están activados
+  Scenario: The invaders reverse their movement
+    Given There is a invader near the screen edge
+    When The invader is in the screen edge
+    Then The invader reverses his movement
 
-Feature: Foto después de cada partida
+Feature: Invader Shot
+  In Order To Increase Difficult
+  As a user
+  The invaders can shoot
 
-  Scenario: Alguien finaliza su partida del space invaders 
-    Given La persona consiente el uso de la cámara
-     When Acaba la partida
-     Then La persona se puede sacar una foto
-     And La persona verá un ranking con su foto y puntuación.
+  Scenario: The invaders shoot randomly
+    Given There are invaders on the screen
+    When A random time is spent
+    Then One invader shoots
 
-  Scenario: Alguien finaliza su partida del space invaders 
-    Given La persona no consiente el uso de la cámara
-     When Acaba la partida
-     Then La persona verá un ranking con una foto predeterminada y su puntuación.
+Feature: Warship Movement
+  In Order To Play
+  As a user
+  I can use the joystick to move the warship
 
-Feature: Cambio de color al tocar barrera
+  Scenario: The user moves the joystick
+    Given There is a warship on the screen
+    And There is a joystick that the user can move
+    When The user uses the joystick
+    Then The warship moves
 
-  Scenario: Un marciano ha disparado
-    Given El marciano dispara
-     When La bala toca la barrera
-     Then Todos los marcianos cambian al mismo color
-     And Desaparece la barrera y el disparo
+Feature: Warship Shot
+  In Order To Play
+  As a user
+  I can use the firing button to shoot with the warship
 
-  Scenario: Varios marcianos han disparado
-    Given Los marcianos disparan a la vez
-     When Las balas tocan alguna barrera
-     Then Todos los marcianos cambian de color aleatoriamente
-     And Desaparecen las barreras y las balas.
-
-Feature: Marciano especial
-
-  Scenario: Comienza la partida 
-    Given La partida acaba de empezar
-     When Comienza el juego
-     Then Aparece un marciano especial
-
-  Scenario: Ha muerto el marciano especial 
-    Given El marciano espacial muere
-     When Han pasado 10 segundos
-     Then Aparece un nuevo marciano especial
-
-Feature: Movimiento vertical de la nave
-
-  Scenario: El jugador quiere mover la nave hacia arriba
-    Given Un usuario quiere esquivar un disparo
-     When Mueve el Joystick hacia arriba
-     Then La nave se mueve hacia arriba.
+  Scenario: The user press the firing button
+    Given There is a warship on the screen2
+    And There is a firing button that the user can press
+    When The user press the firing button
+    Then The warship shoots
