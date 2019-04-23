@@ -1,4 +1,4 @@
-package es.urjc.jjve.spaceinvaders;
+/*package es.urjc.jjve.spaceinvaders;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,4 +47,4 @@ public class ShipTpTest {
 
         assertTrue(tpConfirmed);
     }
-}
+}*/

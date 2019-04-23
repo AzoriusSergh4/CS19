@@ -1,4 +1,4 @@
-package es.urjc.jjve.spaceinvaders;
+/*package es.urjc.jjve.spaceinvaders;
 
 import es.urjc.jjve.spaceinvaders.entities.SpecialInvader;
 import org.junit.After;
@@ -37,4 +37,4 @@ public class SpecialInvaderTest {
         }
         assertTrue(tp);
     }
-}
+}*/
