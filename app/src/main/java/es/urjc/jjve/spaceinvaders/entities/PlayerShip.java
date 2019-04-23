@@ -25,12 +25,6 @@ public class PlayerShip {
     public final int D_UL = 7;
     public final int D_UR = 8;
 
-
-    public float dirX;
-    public float dirY;
-    public float dxdy;
-
-
     private int movement;
    //Cantidad de disparos con los que cuenta la nave a la vez
 
@@ -141,8 +135,6 @@ public class PlayerShip {
     public void setMovementState(int movement){
 
         this.movement=movement;
-        //dirX = targetX/targetY; //Calculates the proportion of direction x
-        //dirY = targetY/targetX; //Calculates the proportion of direction y
     }
 
 
@@ -197,8 +189,6 @@ public class PlayerShip {
                 break;
 
         }
-        //x = x + dirX * shipSpeed / fps; //Calculates new xPos for the ship depending on the direction proportion of the x, if dir 0, does not move on x
-        //y = y + dirY * shipSpeed / fps; //Calculates new ypos for the ship depending on the direection proportion of the y, if dir is 0 does not move on y
         // Actualiza rect el cual es usado para detectar impactos
         rect.top = y;
         rect.bottom = y + height;

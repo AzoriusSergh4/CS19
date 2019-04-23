@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
-
 import es.urjc.jjve.spaceinvaders.controllers.ViewController;
 import es.urjc.jjve.spaceinvaders.view.SpaceInvadersView;
 // SpaceInvadersActivity es el punto de entrada al juego.
@@ -23,7 +22,6 @@ public class SpaceInvadersActivity extends Activity {
     // y responderá a los toques a la pantalla (Event Handler)
     ViewController spaceInvadersController;
     SpaceInvadersView spaceView;
-    private boolean underage;
     int songCount = R.raw.doom;
 
     @Override
@@ -47,7 +45,7 @@ public class SpaceInvadersActivity extends Activity {
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+                //Cant throw UnsupportedOperationException
             }
 
             @Override

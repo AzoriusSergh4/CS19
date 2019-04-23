@@ -4,22 +4,22 @@ import android.net.Uri;
 
 public class Score {
 
-    private int score;
+    private int gameScore;
     private String name;
     private Uri uri;
 
     public Score(String name, int score, Uri uri) {
-        this.score = score;
+        this.gameScore = score;
         this.name = name;
         this.uri = uri;
     }
 
     public int getScore() {
-        return score;
+        return gameScore;
     }
 
     public void setScore(int score) {
-        this.score = score;
+        this.gameScore = score;
     }
 
     public String getName() {

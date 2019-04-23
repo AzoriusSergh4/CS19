@@ -16,6 +16,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ScoreManager {
@@ -25,6 +27,8 @@ public class ScoreManager {
 
     private BufferedReader br;
     private Context context;
+
+    private static final Logger LOGGER = Logger.getLogger("es.urjc.jjve.spaceinvaders.controllers.ScoreManager");
 
     public ScoreManager(Context context) {
         this.context = context;
@@ -67,10 +71,7 @@ public class ScoreManager {
             outputStreamWriter.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
-        /*} finally {
-            outputStreamWriter.close();
-            out.close();*/
+            LOGGER.log(Level.SEVERE, "Error en los buffers");
         }
     }
 
@@ -102,12 +103,11 @@ public class ScoreManager {
             br.close();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Fichero no encontrado");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error en los buffers");
         } finally {
             //Por último, se devuelve el TreeMap con las puntuaciones
-            //inputStream.close();
             return puntuaciones;
         }
     }
