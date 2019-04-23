@@ -196,6 +196,44 @@ public class PlayerShip {
         rect.right = x + length;
     }
 
+    public void updateMove(long fps){
+
+        switch (this.movement) {
+            case LEFT:
+                x = x - shipSpeed / fps;
+                break;
+            case RIGHT:
+                x = x + shipSpeed / fps;
+                break;
+            case UP:
+                y = y + shipSpeed / fps;
+                break;
+            case DOWN:
+                y = y - shipSpeed / fps;
+                break;
+            case D_DL:
+                y = y - shipSpeed / fps;
+                x = x - shipSpeed / fps;
+                break;
+            case D_DR:
+                y = y - shipSpeed / fps;
+                x = x + shipSpeed / fps;
+                break;
+            case D_UL:
+                y = y + shipSpeed / fps;
+                x = x - shipSpeed / fps;
+                break;
+            case D_UR:
+                y = y + shipSpeed / fps;
+                x = x + shipSpeed / fps;
+                break;
+            default:
+                break;
+
+        }
+
+    }
+
     public void teleport(){
         float x =(float) (Math.random()*(screenX))+0;
         float y =(float) (Math.random()*(screenY))+0;
@@ -214,5 +252,13 @@ public class PlayerShip {
     }
     public void setX(float x){
         this.x=x;
+    }
+
+    public int getMovement() {
+        return movement;
+    }
+
+    public void setShipSpeed(float f){
+        this.shipSpeed = f;
     }
 }

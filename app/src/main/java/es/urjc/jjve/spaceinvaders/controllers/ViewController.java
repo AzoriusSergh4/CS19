@@ -66,7 +66,6 @@ public class ViewController {
         this.godBullets = new ArrayList<>();
 
         this.initGame(context);
-
     }
 
 
@@ -253,7 +252,22 @@ public class ViewController {
         playerShip.chColour();
     }
 
-    private void updateInvaders(long fps){
+    public void updateInvadersMovement(long fps){
+        for(Invader inv : invaders){
+            if(inv.getVisibility()) {
+                inv.update(fps);
+                if (inv.getX() > screenX - inv.getLength() || inv.getX() < 0) {
+                    reverse();
+                }
+            }
+        }
+    }
+
+    public void invaderShoot(Bullet bullet){
+        this.invadersBullets.add(bullet);
+    }
+
+    public void updateInvaders(long fps){
         //For each invader, we check if its an active one and then we check if it has the opportunity to shoot
         //if the invader has reached the screen limit, it reverses the direction and goes down
         for (Invader inv : invaders) { //For each visible invader, if there is room in the array,and it wants to shoot
@@ -446,6 +460,12 @@ public class ViewController {
         }
     }
 
+    public void notifyShoot(Bullet newBull) {
+        if(playerBullets.isEmpty()) {
+            this.playerBullets.add(newBull);
+        }
+    }
+
     /**
      * Remove the inactiveBullets
      */
@@ -493,7 +513,40 @@ public class ViewController {
         godMode=15;
     }
 
+    public PlayerShip getPlayerShip(){
+        return this.playerShip;
+    }
+
+    public void setPlayerShip(PlayerShip s){
+        this.playerShip = s;
+    }
+
+    public void setInvadersBullets(List<Bullet> invadersBullets) {
+        this.invadersBullets = invadersBullets;
+    }
+
+    public void setPlayerBullets(List<Bullet> playerBullets) {
+        this.playerBullets = playerBullets;
+    }
+
+    public List<Bullet> getPlayerBullets() {
+        return playerBullets;
+    }
+    public List<Bullet> getInvadersBullets() {
+        return invadersBullets;
+    }
     public List<Invader> getInvaders() {
         return invaders;
     }
+    public void setInvaders(List<Invader> l){
+        this.invaders = l;
+    }
+    public void setView(SpaceInvadersView siv){
+        this.view = siv;
+    }
+
+    public void setJoystickController(JoystickController joystickController){
+        this.joystickController = joystickController;
+    }
+
 }

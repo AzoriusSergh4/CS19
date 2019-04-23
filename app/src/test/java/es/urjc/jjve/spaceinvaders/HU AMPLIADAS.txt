@@ -1,0 +1,46 @@
+Feature: Invader Movement
+  In Order To Increase Difficult
+  As a user
+  The invaders move
+
+  Scenario: The invaders move to the right
+    Given There is a invader on the screen
+    When The game updates
+    Then The invader moves
+
+  Scenario: The invaders reverse their movement
+    Given There is a invader near the screen edge
+    When The invader is in the screen edge
+    Then The invader reverses his movement
+
+Feature: Invader Shot
+  In Order To Increase Difficult
+  As a user
+  The invaders can shoot
+
+  Scenario: The invaders shoot randomly
+    Given There are invaders on the screen
+    When A random time is spent
+    Then One invader shoots
+
+Feature: Warship Movement
+  In Order To Play
+  As a user
+  I can use the joystick to move the warship
+
+  Scenario: The user moves the joystick
+    Given There is a warship on the screen
+    And There is a joystick that the user can move
+    When The user uses the joystick
+    Then The warship moves
+
+Feature: Warship Shot
+  In Order To Play
+  As a user
+  I can use the firing button to shoot with the warship
+
+  Scenario: The user press the firing button
+    Given There is a warship on the screen2
+    And There is a firing button that the user can press
+    When The user press the firing button
+    Then The warship shoots
